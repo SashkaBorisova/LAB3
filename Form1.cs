@@ -6,5 +6,6 @@ namespace LAB3
         {
             InitializeComponent();
         }
+
     }
 }
