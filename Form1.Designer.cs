@@ -41,6 +41,7 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericPeriod).BeginInit();
@@ -101,7 +102,7 @@
             // 
             // numericPeriod
             // 
-            numericPeriod.Location = new Point(1363, 84);
+            numericPeriod.Location = new Point(1398, 84);
             numericPeriod.Name = "numericPeriod";
             numericPeriod.Size = new Size(466, 55);
             numericPeriod.TabIndex = 10;
@@ -118,12 +119,10 @@
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(877, 86);
+            label1.Location = new Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(414, 48);
-            label1.TabIndex = 7;
-            label1.Text = "Ввод числа N прогноза:";
+            label1.Size = new Size(100, 23);
+            label1.TabIndex = 10;
             // 
             // label2
             // 
@@ -144,11 +143,21 @@
             label3.Text = "Получение данных";
             label3.TextAlign = ContentAlignment.TopCenter;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(876, 86);
+            label4.Name = "label4";
+            label4.Size = new Size(481, 48);
+            label4.TabIndex = 11;
+            label4.Text = "Ввод числа N для прогноза:";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(20F, 48F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2302, 1316);
+            Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -180,5 +189,6 @@
         private Label label1;
         private Label label2;
         private Label label3;
+        private Label label4;
     }
 }
