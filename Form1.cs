@@ -81,6 +81,47 @@ namespace LAB3
             }
         }
 
+        private void ProcessData()
+        {
+            if (!int.TryParse(numericPeriod.Text, out int n) || n <= 0)
+            {
+                MessageBox.Show("Введите корректное значение N!");
+                return;
+            }
+
+            int variant = (int)cmdVariant.SelectedItem;
+            switch (variant)
+            {
+                case 3: // Температура
+                    ProcessTemperatureData(n);
+                    break;
+                case 4: // ВВП/ВНП
+                    ProcessGDPData(n);
+                    break;
+                case 12: // Выбросы газов
+                    ProcessEmissionData(n);
+                    break;
+            }
+
+           // DrawChart();
+        }
+
+        private void ProcessTemperatureData(int n)
+        {
+
+        }
+
+        private void ProcessGDPData(int n)
+        {
+
+        }
+
+        private void ProcessEmissionData(int n)
+        {
+
+        }
+
+
     }
 }
 
