@@ -50,7 +50,6 @@
             // cmdVariant
             // 
             cmdVariant.FormattingEnabled = true;
-            cmdVariant.Items.AddRange(new object[] { "Variant 3: Temperature", "Variant 4: GDP/GNP", "Variant: GreenHouse Gases" });
             cmdVariant.Location = new Point(32, 86);
             cmdVariant.Name = "cmdVariant";
             cmdVariant.Size = new Size(814, 56);
@@ -98,7 +97,6 @@
             chart1.Size = new Size(1394, 954);
             chart1.TabIndex = 4;
             chart1.Text = "chart1";
-            chart1.Visible = false;
             // 
             // numericPeriod
             // 
