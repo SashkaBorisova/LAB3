@@ -34,10 +34,53 @@ namespace LAB3
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                //LoadData(openFileDialog.FileName);
+                LoadData(openFileDialog.FileName);
                 //ProcessData();
             }
         }
+
+        private void LoadData(string filePath)
+        {
+            dataTable.Clear();
+            dataValues.Clear();
+
+            try
+            {
+                string[] lines = File.ReadAllLines(filePath);
+                if (lines.Length == 0) return;
+
+                // Разделяем первую строку на заголовки
+                string[] headers = lines[0].Split(',');
+                foreach (string header in headers)
+                {
+                    dataTable.Columns.Add(header.Trim());
+                }
+
+                // Читаем данные из следующих строк
+                for (int i = 1; i < lines.Length; i++)
+                {
+                    string[] fields = lines[i].Split(',');
+                    DataRow row = dataTable.NewRow();
+                    for (int j = 0; j < fields.Length; j++)
+                    {
+                        row[j] = fields[j].Trim();
+                    }
+                    dataTable.Rows.Add(row);
+
+                    // Предполагаем, что данные для анализа находятся в последнем числовом столбце
+                    if (double.TryParse(fields.Last().Trim(), out double value))
+                        dataValues.Add(value);
+                }
+
+                dgvData.DataSource = dataTable;
+                MessageBox.Show("Данные успешно загружены!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке файла: {ex.Message}");
+            }
+        }
+
     }
 }
 
