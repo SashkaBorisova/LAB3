@@ -11,20 +11,20 @@ namespace LAB3
 {
     public partial class Form1 : Form
     {
-        //private DataProcessor processor;
+       // private DataProcessor processor;
         //private TemperatureChartRenderer temperatureRenderer;
-        //private GDPChartRenderer gdpRenderer;
-        //private EmissionChartRenderer emissionRenderer;
-        private DataTable dataTable = new DataTable();
-        private List<double> dataValues = new List<double>();
+       // private GDPChartRenderer gdpRenderer;
+       // private EmissionChartRenderer emissionRenderer;
+       // private DataTable dataTable = new DataTable();
+        //private List<double> dataValues = new List<double>();
 
         public Form1()
         {
             InitializeComponent();
             InitializeUI();
-            //temperatureRenderer = new TemperatureChartRenderer(chart1);
-            //gdpRenderer = new GDPChartRenderer(chart1);
-            //emissionRenderer = new EmissionChartRenderer(chart1);
+          //  temperatureRenderer = new TemperatureChartRenderer(chart1);
+          //  gdpRenderer = new GDPChartRenderer(chart1);
+          //  emissionRenderer = new EmissionChartRenderer(chart1);
         }
 
         private void InitializeUI()
@@ -42,15 +42,15 @@ namespace LAB3
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                //LoadData(openFileDialog.FileName);
-                //ProcessData();
+                LoadData(openFileDialog.FileName);
+                ProcessData();
             }
         }
 
         private void LoadData(string filePath)
         {
-            dataTable.Clear();
-            dataValues.Clear();
+          //  dataTable.Clear();
+          //  dataValues.Clear();
 
             try
             {
@@ -60,41 +60,41 @@ namespace LAB3
                 string[] headers = lines[0].Split(',');
                 foreach (string header in headers)
                 {
-                    dataTable.Columns.Add(header.Trim());
+                   // dataTable.Columns.Add(header.Trim());
                 }
 
                 for (int i = 1; i < lines.Length; i++)
                 {
                     string[] fields = lines[i].Split(',');
-                    DataRow row = dataTable.NewRow();
+                 //   DataRow row = dataTable.NewRow();
                     for (int j = 0; j < fields.Length; j++)
                     {
-                        row[j] = fields[j].Trim();
+                     //   row[j] = fields[j].Trim();
                     }
-                    dataTable.Rows.Add(row);
+                  //  dataTable.Rows.Add(row);
 
-                    if (double.TryParse(fields.Last().Trim(), out double value))
-                        dataValues.Add(value);
+                   // if (double.TryParse(fields.Last().Trim(), out double value))
+                    //    dataValues.Add(value);
                 }
 
-                dgvData.DataSource = dataTable;
+              //  dgvData.DataSource = dataTable;
                 MessageBox.Show("Data loaded successfully!");
 
-                // Initialize processor based on variant
+              //  Initialize processor based on variant
                 int variant = (int)cmdVariant.SelectedItem;
                 switch (variant)
                 {
                     case 3:
-                       // processor = new TemperatureDataProcessor();
+                      //  processor = new TemperatureDataProcessor();
                         break;
                     case 4:
-                       // processor = new GDPDataProcessor();
+                    //   processor = new GDPDataProcessor();
                         break;
                     case 12:
-                       // processor = new EmissionDataProcessor();
+                   //    processor = new EmissionDataProcessor();
                         break;
                 }
-               // processor.LoadData(filePath);
+              // processor.LoadData(filePath);
             }
             catch (Exception ex)
             {
@@ -110,8 +110,37 @@ namespace LAB3
                 return;
             }
 
-           // processor.ProcessData(n);
-           // DrawChart();
+           //processor.ProcessData(n);
+           DrawChart();
+        }
+        private void DrawChart()
+        {
+            chart1.Series.Clear();
+            int variant = (int)cmdVariant.SelectedItem;
+            switch (variant)
+            {
+                case 3:
+                  //  var temperatureProcessor = (TemperatureDataProcessor)processor;
+                  //  temperatureRenderer.RenderChart(
+                  //      temperatureProcessor.GetDays(),
+                  //      temperatureProcessor.GetTemperatures(),
+                  //      processor.GetValues());
+                    break;
+                case 4:
+                  //  var gdpProcessor = (GDPDataProcessor)processor;
+                  //  gdpRenderer.RenderChart(
+                   //     gdpProcessor.GetYears(),
+                   //     gdpProcessor.GetIndicators(),
+                   //     processor.GetValues());
+                    break;
+                case 12:
+                   // var emissionProcessor = (EmissionDataProcessor)processor;
+                   // emissionRenderer.RenderChart(
+                    //    emissionProcessor.GetYears(),
+                    //    emissionProcessor.GetEmissions(),
+                    //    processor.GetValues());
+                    break;
+            }
         }
     }
 }
