@@ -80,7 +80,7 @@ namespace LAB3
                 dgvData.DataSource = dataTable;
                 MessageBox.Show("Data loaded successfully!");
 
-                Initialize processor based on variant
+                //Выбор на основе варианта
                 int variant = (int)cmdVariant.SelectedItem;
                 switch (variant)
                 {
@@ -131,7 +131,8 @@ namespace LAB3
                     gdpRenderer.RenderChart(
                         gdpProcessor.GetYears(),
                         gdpProcessor.GetIndicators(),
-                        processor.GetValues());
+                        gdpProcessor.GetGdpForecast(),
+                        gdpProcessor.GetGnpForecast());
                     break;
                 case 12:
                     var emissionProcessor = (EmissionDataProcessor)processor;
