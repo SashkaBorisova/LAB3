@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -44,6 +45,73 @@ namespace LAB3
                 //LoadData(openFileDialog.FileName);
                 //ProcessData();
             }
+        }
+
+        private void LoadData(string filePath)
+        {
+            dataTable.Clear();
+            dataValues.Clear();
+
+            try
+            {
+                string[] lines = File.ReadAllLines(filePath);
+                if (lines.Length == 0) return;
+
+                string[] headers = lines[0].Split(',');
+                foreach (string header in headers)
+                {
+                    dataTable.Columns.Add(header.Trim());
+                }
+
+                for (int i = 1; i < lines.Length; i++)
+                {
+                    string[] fields = lines[i].Split(',');
+                    DataRow row = dataTable.NewRow();
+                    for (int j = 0; j < fields.Length; j++)
+                    {
+                        row[j] = fields[j].Trim();
+                    }
+                    dataTable.Rows.Add(row);
+
+                    if (double.TryParse(fields.Last().Trim(), out double value))
+                        dataValues.Add(value);
+                }
+
+                dgvData.DataSource = dataTable;
+                MessageBox.Show("Data loaded successfully!");
+
+                // Initialize processor based on variant
+                int variant = (int)cmdVariant.SelectedItem;
+                switch (variant)
+                {
+                    case 3:
+                       // processor = new TemperatureDataProcessor();
+                        break;
+                    case 4:
+                       // processor = new GDPDataProcessor();
+                        break;
+                    case 12:
+                       // processor = new EmissionDataProcessor();
+                        break;
+                }
+               // processor.LoadData(filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading file: {ex.Message}");
+            }
+        }
+
+        private void ProcessData()
+        {
+            if (!int.TryParse(numericPeriod.Text, out int n) || n <= 0)
+            {
+                MessageBox.Show("Enter a valid value for N!");
+                return;
+            }
+
+           // processor.ProcessData(n);
+           // DrawChart();
         }
     }
 }
