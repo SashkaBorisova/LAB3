@@ -11,12 +11,12 @@ namespace LAB3
 {
     public partial class Form1 : Form
     {
-       private DataProcessor processor;
-       private TemperatureChartRenderer temperatureRenderer;
-       private GDPChartRenderer gdpRenderer;
-       private EmissionChartRenderer emissionRenderer;
-       private DataTable dataTable = new DataTable();
-       private List<double> dataValues = new List<double>();
+        private DataProcessor processor;
+        private TemperatureChartRenderer temperatureRenderer;
+        private GDPChartRenderer gdpRenderer;
+        private EmissionChartRenderer emissionRenderer;
+        private DataTable dataTable = new DataTable();
+        private List<double> dataValues = new List<double>();
 
         public Form1()
         {
@@ -32,6 +32,7 @@ namespace LAB3
             cmdVariant.Items.AddRange(new object[] { 3, 4, 12 });
             cmdVariant.SelectedIndex = 0;
             btnOpenFile.Click += BtnLoad_Click;
+            btnForecast.Click += btnForecast_Click;
         }
 
         private void BtnLoad_Click(object sender, EventArgs e)
@@ -88,13 +89,13 @@ namespace LAB3
                         processor = new TemperatureDataProcessor();
                         break;
                     case 4:
-                       processor = new GDPDataProcessor();
+                        processor = new GDPDataProcessor();
                         break;
                     case 12:
-                       processor = new EmissionDataProcessor();
+                        processor = new EmissionDataProcessor();
                         break;
                 }
-               processor.LoadData(filePath);
+                processor.LoadData(filePath);
             }
             catch (Exception ex)
             {
@@ -110,8 +111,8 @@ namespace LAB3
                 return;
             }
 
-           //processor.ProcessData(n);
-           DrawChart();
+            processor.ProcessData(n);
+            DrawChart();
         }
         private void DrawChart()
         {
@@ -121,10 +122,10 @@ namespace LAB3
             {
                 case 3:
                     var temperatureProcessor = (TemperatureDataProcessor)processor;
-                        temperatureRenderer.RenderChart(
-                        temperatureProcessor.GetDays(),
-                        temperatureProcessor.GetTemperatures(),
-                        processor.GetValues());
+                    temperatureRenderer.RenderChart(
+                    temperatureProcessor.GetDays(),
+                    temperatureProcessor.GetTemperatures(),
+                    processor.GetValues());
                     break;
                 case 4:
                     var gdpProcessor = (GDPDataProcessor)processor;
@@ -142,6 +143,11 @@ namespace LAB3
                         processor.GetValues());
                     break;
             }
+        }
+
+        private void btnForecast_Click(object sender, EventArgs e)
+        {
+            ProcessData();
         }
     }
 }

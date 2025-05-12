@@ -114,6 +114,7 @@
             btnForecast.TabIndex = 6;
             btnForecast.Text = "Рассчитать";
             btnForecast.UseVisualStyleBackColor = true;
+            btnForecast.Click += btnForecast_Click;
             // 
             // label1
             // 
